@@ -1,0 +1,359 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14642,        351]
+NotebookOptionsPosition[     13827,        329]
+NotebookOutlinePosition[     14238,        345]
+CellTagsIndexPosition[     14195,        342]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Visualizing the phase change at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Kappa]", "=", "4"}], TraditionalForm]],ExpressionUUID->
+  "082ad0b8-c01a-4c9f-87ec-b22c8459b83d"],
+ " for driving functions of the form ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Lambda]", "(", "t", ")"}], "=", 
+    RowBox[{"\[Kappa]", 
+     SqrtBox[
+      RowBox[{"1", "-", "t"}]]}]}], TraditionalForm]],ExpressionUUID->
+  "0a6ef484-55c7-494a-85da-1fac6e8fed21"]
+}], "Chapter",
+ CellChangeTimes->{{3.7882757306519623`*^9, 3.7882757514209604`*^9}, {
+  3.79201052222128*^9, 3.7920105302833295`*^9}, {3.792010942061966*^9, 
+  3.7920109527360325`*^9}},ExpressionUUID->"7d205611-add0-45e0-aa7d-\
+b25f718d3cef"],
+
+Cell[TextData[{
+ "The function ",
+ Cell[BoxData[
+  FormBox["gm", TraditionalForm]],ExpressionUUID->
+  "b1b56fe1-3587-47d9-a7d3-a232e1511f1f"],
+ " maps the upper half plane to the upper half plane minus a slit of size \
+approximately ",
+ Cell[BoxData[
+  FormBox[
+   FractionBox["1", "m"], TraditionalForm]],ExpressionUUID->
+  "4c67b9d1-ba88-48db-9bb3-462312f18196"],
+ " at an angle ",
+ Cell[BoxData[
+  FormBox["\[Alpha]\[Pi]", TraditionalForm]],ExpressionUUID->
+  "1d48fbe3-cc0a-4b6d-9668-723370994377"],
+ " from the positive ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],ExpressionUUID->
+  "fc30f425-5b3d-42dc-9638-7093f8622823"],
+ "-axis.  We will repeatedly: \n\t1. Apply this function, then \n\t2. \
+Slightly scale down the image by the ",
+ Cell[BoxData[
+  FormBox["Scalingr", TraditionalForm]],ExpressionUUID->
+  "9d543f20-ce4a-429f-a926-de8a6ef9b025"],
+ " ratio, then \n\t3. Repeat.  \nThe result will be to approximate the curve \
+with driving function ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Lambda]", "=", 
+    RowBox[{"\[Kappa]", 
+     SqrtBox[
+      RowBox[{"1", "-", "t"}]]}]}], TraditionalForm]],ExpressionUUID->
+  "dccb91a1-a8a9-4f76-9b91-8aa5e0473ecd"],
+ ".  This simple code provides a new way to continuously visualize how \
+changing the parameter ",
+ Cell[BoxData[
+  FormBox["\[Kappa]", TraditionalForm]],ExpressionUUID->
+  "14a93918-9d7c-490d-bb3e-e1d826c9ef88"],
+ " changes the curve.  Notice the non-degenerating logarithmic spiral as ",
+ Cell[BoxData[
+  FormBox["\[Kappa]", TraditionalForm]],ExpressionUUID->
+  "3c1dea3e-5ce5-41dc-9e78-4b92e4c992f7"],
+ " approaches 4, and the discontinuous change to hitting the ",
+ Cell[BoxData[
+  FormBox["x", TraditionalForm]],ExpressionUUID->
+  "7899b482-d19a-4355-9b00-c9d77b012f10"],
+ "-axis for values of ",
+ Cell[BoxData[
+  FormBox["\[Kappa]", TraditionalForm]],ExpressionUUID->
+  "202b2002-af7f-4c2d-8580-b40cd1fc3d1a"],
+ " (approximately) greater than 4.\n\nRelated papers:\nLind, Joan. 2005. \
+\[OpenCurlyDoubleQuote]A Sharp Condition For the Loewner Equation To Generate \
+Slits.\[CloseCurlyDoubleQuote]  ",
+ StyleBox["Ann. Acad. Sci. Fenn. Math.",
+  FontSlant->"Italic"],
+ " 30, no. 1: 143\[Dash]158.\n\nKager, Wouter, Bernard Nienhuis and Leo \
+Kadanoff. 2004. \[OpenCurlyDoubleQuote]Exact Solutions for Loewner \
+Evolutions.\[CloseCurlyDoubleQuote] ",
+ StyleBox["J. Stat. Phys.",
+  FontSlant->"Italic"],
+ " 115: 805-822."
+}], "Text",
+ CellChangeTimes->{{3.7920105455544524`*^9, 3.792010658373149*^9}, {
+  3.7920107895499897`*^9, 3.792010839332308*^9}, {3.7920109678611293`*^9, 
+  3.79201102251448*^9}, {3.7920110803358607`*^9, 3.792011081287856*^9}, {
+  3.792011215320711*^9, 3.7920113080443077`*^9}, {3.7920113439475393`*^9, 
+  3.7920114583972673`*^9}},ExpressionUUID->"6ea1deb3-c278-4855-ba51-\
+0b5e0bd8739b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", 
+    RowBox[{"a_", ",", "z_"}], "]"}], ":=", 
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"z", "+", "1", "-", "a"}], ")"}], 
+     RowBox[{"1", "-", "a"}]], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"z", "-", "a"}], ")"}], "a"]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"gm", "[", 
+    RowBox[{"a_", ",", "m_", ",", "z_"}], "]"}], ":=", 
+   RowBox[{
+    FractionBox["1", "m"], 
+    RowBox[{"g", "[", 
+     RowBox[{"a", ",", " ", 
+      RowBox[{"m", " ", "z"}]}], "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Scalingr", "[", 
+   RowBox[{"\[Kappa]_", ",", "\[Alpha]_"}], "]"}], ":=", 
+  FractionBox[
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["\[Kappa]", "2"], "\[Alpha]", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "\[Alpha]"}], ")"}]}], "-", 
+    RowBox[{"4", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"2", "\[Alpha]"}]}], ")"}], "2"]}]}], 
+   RowBox[{
+    RowBox[{
+     SuperscriptBox["\[Kappa]", "2"], "\[Alpha]", 
+     RowBox[{"(", 
+      RowBox[{"1", "-", "\[Alpha]"}], ")"}]}], "+", 
+    RowBox[{"4", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"2", "\[Alpha]"}]}], ")"}], "2"]}]}]]}]}], "Input",
+ CellChangeTimes->{{3.7815547958254366`*^9, 3.7815548123685393`*^9}, {
+  3.784564740014335*^9, 3.7845647408673353`*^9}, {3.7845654233448315`*^9, 
+  3.784565500107329*^9}, {3.784994005408611*^9, 3.7849940176279993`*^9}, {
+  3.784994261540161*^9, 3.784994287096487*^9}, {3.7882865910319567`*^9, 
+  3.788286591188957*^9}, {3.7920101995852137`*^9, 3.7920102000712175`*^9}, {
+  3.7920102557075725`*^9, 3.7920102677006493`*^9}, {3.792010845280347*^9, 
+  3.792010852917405*^9}, {3.949445224427903*^9, 3.949445225361518*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"eaf46010-87ac-43ce-9d3e-50b0b60850a2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Graphics", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ColorData", "[", 
+         RowBox[{"97", ",", "1"}], "]"}], ",", 
+        RowBox[{"Line", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Re", "[", "#", "]"}], ",", 
+             RowBox[{"Im", "[", "#", "]"}]}], "}"}], "&"}], "/@", 
+          RowBox[{"NestList", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"N", "[", 
+              RowBox[{
+               RowBox[{"Scalingr", "[", 
+                RowBox[{"\[Kappa]", ",", "0.47"}], "]"}], "*", 
+               RowBox[{"gm", "[", 
+                RowBox[{"0.47", ",", "4", ",", "#"}], "]"}]}], "]"}], "&"}], 
+            ",", "0", ",", "n"}], "]"}]}], "]"}]}], "}"}], 
+      "\[IndentingNewLine]", "}"}], ",", 
+     RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+     RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", "xmax"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "xmax"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "25000", ",", "\"\<No of slit map iterations\>\""}], 
+      "}"}], ",", "5", ",", "30000", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "\[Kappa]", ",", "3.98", ",", 
+       "\"\<Driving function \
+\!\(\*Cell[\"\[Kappa]\",ExpressionUUID->\"cbab3985-efdd-4357-a29f-\
+19a392081bce\"]\)\>\""}], "}"}], ",", "3.9", ",", "4.02", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xmax", ",", "1.4", ",", "\"\<Window bounds\>\""}], "}"}], ",", 
+     "1", ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7815552059910603`*^9, 3.7815552097480817`*^9}, {
+   3.7815552517233505`*^9, 3.7815554789708085`*^9}, {3.78155552603311*^9, 
+   3.781555526390113*^9}, {3.7815558495931826`*^9, 3.781555860232273*^9}, {
+   3.7816151611159077`*^9, 3.7816152580875206`*^9}, {3.781615375682267*^9, 
+   3.7816155070461087`*^9}, {3.7825104039419775`*^9, 
+   3.7825104229239836`*^9}, {3.7825104675229855`*^9, 
+   3.7825105550059786`*^9}, {3.7825106707319765`*^9, 3.782510675942984*^9}, {
+   3.7825107633559785`*^9, 3.7825108110869837`*^9}, {3.7825108443909903`*^9, 
+   3.7825109017639785`*^9}, {3.782510985165979*^9, 3.782511022457988*^9}, {
+   3.78251112374998*^9, 3.782511130489978*^9}, {3.7837181725977955`*^9, 
+   3.7837181807407956`*^9}, {3.7845678481914997`*^9, 3.7845678658425035`*^9}, 
+   3.7845681343625*^9, {3.7845681769635053`*^9, 3.7845681787505007`*^9}, {
+   3.7845685993214984`*^9, 3.7845686446584997`*^9}, {3.784568679817509*^9, 
+   3.7845687081674986`*^9}, {3.7845688614125*^9, 3.7845689007395372`*^9}, {
+   3.7852733359627104`*^9, 3.785273344840048*^9}, {3.7852734518931694`*^9, 
+   3.7852734552512875`*^9}, {3.7873372727035947`*^9, 
+   3.7873372734535947`*^9}, {3.787346791209608*^9, 3.7873468028165956`*^9}, {
+   3.78768257420259*^9, 3.787682597444559*^9}, {3.7876827096125517`*^9, 
+   3.787682725071597*^9}, {3.787683250810551*^9, 3.7876833525405493`*^9}, {
+   3.7882819811609573`*^9, 3.7882819819889574`*^9}, {3.7882825017159605`*^9, 
+   3.7882825067829556`*^9}, {3.7882825731929617`*^9, 
+   3.7882826459609566`*^9}, {3.7882826987509556`*^9, 
+   3.7882827060699606`*^9}, {3.7882837585769625`*^9, 
+   3.7882837887159605`*^9}, {3.788283982387969*^9, 3.7882841014529557`*^9}, {
+   3.788284144612961*^9, 3.7882841532229548`*^9}, {3.7882850236549687`*^9, 
+   3.78828506462696*^9}, {3.7882872091689672`*^9, 3.7882872250759583`*^9}, {
+   3.7882872895679665`*^9, 3.788287307051961*^9}, {3.7882873373069572`*^9, 
+   3.788287337683961*^9}, 3.788287437363963*^9, {3.788287606740969*^9, 
+   3.7882876604170656`*^9}, {3.788287700055207*^9, 3.7882877368493395`*^9}, {
+   3.7920102179173307`*^9, 3.7920102426894927`*^9}, 3.7920103209909897`*^9, {
+   3.7920103565482187`*^9, 3.792010379327368*^9}, {3.7920104414667673`*^9, 
+   3.7920104987521286`*^9}, {3.792010864872476*^9, 3.792010930355892*^9}, {
+   3.9494452586964827`*^9, 3.949445272716047*^9}},
+ CellLabel->"In[6]:=",ExpressionUUID->"65d3d83c-5a9e-4875-8407-a2886f21488a"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 25000, $CellContext`xmax$$ = 
+    1.4, $CellContext`\[Kappa]$$ = 3.98, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 25000, "No of slit map iterations"}, 5, 30000, 
+      1}, {{
+       Hold[$CellContext`\[Kappa]$$], 3.98, 
+       "Driving function \!\(\*Cell[\"\[Kappa]\"]\)"}, 3.9, 4.02}, {{
+       Hold[$CellContext`xmax$$], 1.4, "Window bounds"}, 1, 3}}, 
+    Typeset`size$$ = {500., {246., 249.90576221590163`}}, Typeset`update$$ = 
+    0, Typeset`initDone$$, Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 25000, $CellContext`xmax$$ = 
+        1.4, $CellContext`\[Kappa]$$ = 3.98}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Graphics[{{
+          ColorData[97, 1], 
+          Line[
+           Map[{
+             Re[#], 
+             Im[#]}& , 
+            NestList[
+            N[$CellContext`Scalingr[$CellContext`\[Kappa]$$, 
+                0.47] $CellContext`gm[0.47, 4, #]]& , 
+             0, $CellContext`n$$]]]}}, Axes -> True, AspectRatio -> 1, 
+        ImageSize -> 500, 
+        PlotRange -> {{0, $CellContext`xmax$$}, {0, $CellContext`xmax$$}}], 
+      "Specifications" :> {{{$CellContext`n$$, 25000, 
+          "No of slit map iterations"}, 5, 30000, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Kappa]$$, 3.98, 
+          "Driving function \!\(\*Cell[\"\[Kappa]\"]\)"}, 3.9, 4.02, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`xmax$$, 1.4, "Window bounds"}, 1, 3}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{547., {311.13403309800196`, 316.86596690199804`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.7882876285584497`*^9, 3.7882876615578794`*^9}, 
+   3.7882877395742655`*^9, 3.7885491819224205`*^9, {3.7920099339625163`*^9, 
+   3.7920099571196656`*^9}, {3.792010219129342*^9, 3.792010243006491*^9}, {
+   3.7920103077239056`*^9, 3.7920103212879953`*^9}, {3.792010361536252*^9, 
+   3.7920103869864135`*^9}, {3.792010442162765*^9, 3.79201049958717*^9}, {
+   3.792010875895547*^9, 3.792010900487713*^9}, 3.79201093126692*^9, 
+   3.9494452302032285`*^9, 3.9494452741640773`*^9, 3.949445320976135*^9},
+ CellLabel->"Out[6]=",ExpressionUUID->"acce7dd6-f026-4ad0-ab81-906e06a026a4"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{919.875, 560.25},
+WindowMargins->{{45, Automatic}, {Automatic, 24.75}},
+FrontEndVersion->"13.0 for Microsoft Windows (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"b6ca2024-c2a6-40dc-a89f-9c56910581a9"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 712, 19, 119, "Chapter",ExpressionUUID->"7d205611-add0-45e0-aa7d-b25f718d3cef"],
+Cell[1295, 43, 2789, 67, 316, "Text",ExpressionUUID->"6ea1deb3-c278-4855-ba51-0b5e0bd8739b"],
+Cell[4087, 112, 1915, 53, 110, "Input",ExpressionUUID->"eaf46010-87ac-43ce-9d3e-50b0b60850a2"],
+Cell[CellGroupData[{
+Cell[6027, 169, 4630, 94, 150, "Input",ExpressionUUID->"65d3d83c-5a9e-4875-8407-a2886f21488a"],
+Cell[10660, 265, 3139, 60, 670, "Output",ExpressionUUID->"acce7dd6-f026-4ad0-ab81-906e06a026a4"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
